@@ -11,10 +11,26 @@
     <div>제시어: <span id="word"></span></div>
     <input type="text">
     <button>입력</button>
+    <button>버튼2</button>
+    <button>버튼3</button>
     <script>
-        
-        
-
+    //    const number = parseInt( prompt('몇명이 참가하나요?'), 10);
+    //    alert(number);
+    //    confirm('확인이나 취소를 선택해주세요!')
+       const $input = document.querySelector('input')
+       console.log($input);
+       const $button = document.querySelectorAll('button')
+       console.log($button); 
+    //    document.querySelector('input').addEventListener('input',function(){
+    //        console.log("input text");
+    //    })
+       document.querySelector('input').addEventListener('input', (event) => {
+        console.log(event.target.value);  //입력한 값이 바로바로 콘솔로 보인다.
+        console.log(event.target)
+        })
+       document.querySelector('button').addEventListener('click',function(){
+           console.log("click button!!")
+       })
     </script>
 </body>
 </html>
