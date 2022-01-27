@@ -11,26 +11,46 @@
     <div>제시어: <span id="word"></span></div>
     <input type="text">
     <button>입력</button>
-    <button>버튼2</button>
-    <button>버튼3</button>
+    <!-- <button>버튼2</button>
+    <button>버튼3</button> -->
     <script>
     //    const number = parseInt( prompt('몇명이 참가하나요?'), 10);
     //    alert(number);
     //    confirm('확인이나 취소를 선택해주세요!')
+       const number = Number(prompt('몇명이 참가하나요?'));
        const $input = document.querySelector('input')
-       console.log($input);
+    //   console.log($input);
        const $button = document.querySelectorAll('button')
-       console.log($button); 
+    //   console.log($button); 
     //    document.querySelector('input').addEventListener('input',function(){
     //        console.log("input text");
     //    })
-       document.querySelector('input').addEventListener('input', (event) => {
-        console.log(event.target.value);  //입력한 값이 바로바로 콘솔로 보인다.
-        console.log(event.target)
-        })
-       document.querySelector('button').addEventListener('click',function(){
-           console.log("click button!!")
-       })
+    //    document.querySelector('input').addEventListener('input', (event) => {
+    //     console.log(event.target.value);  //입력한 값이 바로바로 콘솔로 보이기 위해 event를 사용!!
+    //     console.log(event.target) 
+    //     })
+    //    document.querySelector('button').addEventListener('click',function(){
+    //        console.log("click button!!")
+    //    })
+    let word;  //제시어
+    let newWord;  //새로 입력한 단어
+    const $word = document.querySelector('#word');
+    const onClickButton = () => {
+        if(!word){ //제시어가 비어있는가?
+          word = newWord;  //data를 넣어준것만 됨.
+          $word.textContent = word;  //화면에 나타나도록 지정해주는것!! 
+          $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!         
+        }
+        else{
+          
+        }
+    };
+    const onInput = () => {
+      newWord = event.target.value
+    };
+
+    document.querySelector('button').addEventListener('click',onClickButton);
+    document.querySelector('input').addEventListener('input',onInput);
     </script>
 </body>
 </html>
