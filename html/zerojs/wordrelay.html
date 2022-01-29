@@ -35,18 +35,42 @@
     let word;  //제시어
     let newWord;  //새로 입력한 단어
     const $word = document.querySelector('#word');
+    const $order = document.querySelector('#order');
     const onClickButton = () => {
         if(!word){ //제시어가 비어있는가?
           word = newWord;  //data를 넣어준것만 됨.
           $word.textContent = word;  //화면에 나타나도록 지정해주는것!! 
           $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!         
+          const order = Number($order.textContent); //현재 순서
+          if(order+1 > number){
+             $order.textContent = 1;
+          } 
+          else{
+             $order.textContent = order + 1;
+          }      
         }
-        else{
-          
+        else{ //제시어가 있는경우
+          if( word[word.length-1] === newWord[0]){ //올바른가
+            word = newWord;  //data를 넣어준것만 됨.
+            $word.textContent = word;  //화면에 나타나도록 지정해주는것!! 
+            $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!  
+            const order = Number($order.textContent);
+            if(order+1 > number){
+             $order.textContent = 1;
+            } 
+            else{
+              $order.textContent = order + 1;
+            }      
+          }
+          else{ //올바르지 않은가
+            
+          }
         }
+       
     };
     const onInput = () => {
-      newWord = event.target.value
+      newWord = event.target.value;
+      console.log(newWord)
     };
 
     document.querySelector('button').addEventListener('click',onClickButton);
