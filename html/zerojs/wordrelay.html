@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="KO">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>끝말잇기</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
 </head>
+
 <body>
-    <div><span id="order">1</span>번째 참가자</div>
-    <div>제시어: <span id="word"></span></div>
-    <input type="text">
-    <button>입력</button>
-    <!-- <button>버튼2</button>
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <!-- <button>버튼2</button>
     <button>버튼3</button> -->
-    <script>
+  <script>
     //    const number = parseInt( prompt('몇명이 참가하나요?'), 10);
     //    alert(number);
     //    confirm('확인이나 취소를 선택해주세요!')
-       const number = Number(prompt('몇명이 참가하나요?'));
-       const $input = document.querySelector('input')
+    const number = Number(prompt('몇명이 참가하나요?'));
+    const $input = document.querySelector('input')
     //   console.log($input);
-       const $button = document.querySelectorAll('button')
+    const $button = document.querySelectorAll('button')
     //   console.log($button); 
     //    document.querySelector('input').addEventListener('input',function(){
     //        console.log("input text");
@@ -37,45 +39,49 @@
     const $word = document.querySelector('#word');
     const $order = document.querySelector('#order');
     const onClickButton = () => {
-        if(!word){ //제시어가 비어있는가?
+      if (!word) { //제시어가 비어있는가?  // 리팩토링 할수있다!!(p.199)
+        word = newWord;  //data를 넣어준것만 됨.
+        $word.textContent = word;  //화면에 나타나도록 지정해주는것!! 
+        $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!         
+        $input.focus(); //input태그안에 커서를 표시
+        const order = Number($order.textContent); //현재 순서(textContent는 문자라서 숫자로 변경)
+        if (order + 1 > number) {
+          $order.textContent = 1;
+        }
+        else {
+          $order.textContent = order + 1;
+        }
+      }
+      else { //제시어가 있는경우
+        if (word[word.length - 1] === newWord[0]) { //올바른가 (마지막글씨와 첫번째 글씨가 같은가)
           word = newWord;  //data를 넣어준것만 됨.
           $word.textContent = word;  //화면에 나타나도록 지정해주는것!! 
-          $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!         
-          const order = Number($order.textContent); //현재 순서
-          if(order+1 > number){
-             $order.textContent = 1;
-          } 
-          else{
-             $order.textContent = order + 1;
-          }      
-        }
-        else{ //제시어가 있는경우
-          if( word[word.length-1] === newWord[0]){ //올바른가
-            word = newWord;  //data를 넣어준것만 됨.
-            $word.textContent = word;  //화면에 나타나도록 지정해주는것!! 
-            $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!  
-            const order = Number($order.textContent);
-            if(order+1 > number){
-             $order.textContent = 1;
-            } 
-            else{
-              $order.textContent = order + 1;
-            }      
+          $input.value = ''; //기존의 input에 단어가 남아있지않도록 비워준다!!  
+          $input.focus();
+          const order = Number($order.textContent);
+          if (order + 1 > number) {
+            $order.textContent = 1;
           }
-          else{ //올바르지 않은가
-            
+          else {
+            $order.textContent = order + 1;
           }
         }
-       
+        else { //올바르지 않은가
+            alert('올바른 단어가 아닙니다.');
+            $input.value= '';
+            $input.focus();
+        }
+      }
+
     };
     const onInput = () => {
       newWord = event.target.value;
       console.log(newWord)
     };
 
-    document.querySelector('button').addEventListener('click',onClickButton);
-    document.querySelector('input').addEventListener('input',onInput);
-    </script>
+    document.querySelector('button').addEventListener('click', onClickButton);
+    document.querySelector('input').addEventListener('input', onInput);
+  </script>
 </body>
-</html>
 
+</html>
