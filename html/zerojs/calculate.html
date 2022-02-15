@@ -24,9 +24,7 @@
           height: 50px;
           margin: 5px;
       }
-      .row{
-
-      }
+    
       .container{
          width: 100%;
          text-align: center;
@@ -34,39 +32,40 @@
     </style>
 </head>
 <body>
-<div class="container"> 
-    <!--
-        input에 readonly를 해주는 이유는 자바스크립트로 인한 입력만
-        가능하도록 하고 직접입력하는것을 막기위해 사용
-     -->
-    <input readonly id="operator"> 
-    <input type="number" readonly id="result">
-    <div class="row">
-        <button id="num-7">7</button>
-        <button id="num-8">8</button>
-        <button id="num-9">9</button>
-        <button id="plus">+</button>
+    <div class="container"> 
+        <!--
+            input에 readonly를 해주는 이유는 자바스크립트로 인한 입력만
+            가능하도록 하고 직접입력하는것을 막기위해 사용
+        -->
+        <input readonly id="operator"> 
+        <input type="number" readonly id="result">
+        <div class="row">
+            <button id="num-7">7</button>
+            <button id="num-8">8</button>
+            <button id="num-9">9</button>
+            <button id="plus">+</button>
+        </div>
+        <div class="row">
+            <button id="num-4">4</button>
+            <button id="num-5">5</button>
+            <button id="num-6">6</button>
+            <button id="minus">-</button>
+        </div>
+        <div class="row">
+            <button id="num-1">1</button>
+            <button id="num-2">2</button>
+            <button id="num-3">3</button>
+            <button id="divide">/</button>
+        </div>
+        <div class="row">
+            <button id="clear">C</button>
+            <button id="num-0">0</button>
+            <button id="calculate">=</button>
+            <button id="multifly">x</button>
+        </div>
     </div>
-    <div class="row">
-        <button id="num-4">4</button>
-        <button id="num-5">5</button>
-        <button id="num-6">6</button>
-        <button id="minus">-</button>
-    </div>
-    <div class="row">
-        <button id="num-1">1</button>
-        <button id="num-2">2</button>
-        <button id="num-3">3</button>
-        <button id="divide">/</button>
-    </div>
-    <div class="row">
-        <button id="clear">C</button>
-        <button id="zero">0</button>
-        <button id="calculate">=</button>
-        <button id="multifly">x</button>
-    </div>
-</div>
-<script>
+<body>
+<script defer>
     let numOne = '';
     let operator = '';
     let numTwo ='';
@@ -75,42 +74,74 @@
     //함수에서 중복을 제거할때 달라지는 부분을 매개변수로 바꿔주면 된다.
     // number를 매개변수로 넣어준다.
     // 중복된 부분을 onClickNumber 함수안에 옮겨준다.
-    const onClickNumber = (number) => () => {    //  return (event) => {  } 화살표함수를 리턴이랑 중괄호를 생략할수 있다.
+  /*  const onClickNumber = (number) => (event) => {    //  return (event) => {  } 화살표함수를 리턴이랑 중괄호를 생략할수 있다.
             //화살표가 연달아 나오는 모양이 되면 함수가 함수를 리턴하는 형태라고 생각하면 된다.
             // 함수가 함수를 리턴하는 형태를 고차함수(high order function)이라고 한다.
-            if(operator){ //비어있지 않다.       
+            // 고차함수를 쓰는이유? ==> 함수간에 중복되는 부분을 제거하기 위해서 사용!!!!
+            if(operator){ //비어있지 않다.   
+                if(!numTwo){
+                    $result.value = ''; //numTwo없으면 화면을 비워라!!!
+                }    
                 numTwo += number;  
             } 
             else{ //비어있다.
                 numOne += number;  
             }
-            $result.value = number;  //화면에도 나오게 바꾸도록 해줘야한다.
+            $result.value += number;  //화면에도 나오게 바꾸도록 해줘야한다.
         }
     //중복된 부분도 함수로 정의해주고 addEventListener에서 onClickNumber(매개변수)를 지정해서
     // 짥게 줄일수 있다. 하지만 이런식으로 해줘도 오류가 발생한다.
     // 발생원인 => 위의 함수를 return값으로 undefined를 반환하기 때문에 호출 부분에서 함수와 
-    // 형태가 일치하지 않는다. 따라서 형태를 함수형태로 맞춰주고 그안에 중복되는 
+    // 형태가 일치하지 않는다. 따라서 형태를 함수형태로 자리를 맞춰주고 그안에 중복되는 
     // 부분을 넣어주도록 한다.
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(0));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(1));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(2));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(3));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(4));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(5));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(6));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(7));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(8));
-    document.querySelector('#num-0').addEventListener('click',onClickNumber(9));
-   
-    document.querySelector('#minus').addEventListener('click',() => { } );
-    document.querySelector('#plus').addEventListener('click',() => { } );
-    document.querySelector('#divide').addEventListener('click',() => { } );
-    document.querySelector('#multiply').addEventListener('click',() => { } );
-    document.querySelector('#calculate').addEventListener('click',() => { } );
-    document.querySelector('#clear').addEventListener('click',() => { } );
-    document.querySelector('#num-0').addEventListener('click',() => { });
+    */
+// 여기서는 if문의 중첩되어서 제거하는 방법(p226의 절차를 따른다.)
+    const onClickNumber = (number) => (event) => {    
+            if(!operator){  // 2. !을 넣어서 짧은 절차를 먼저 실행하게 넣어준다. //비어있다.
+                numOne += number; 
+                $result.value += number;  //1. 공통된 부분을 넣어준다. 
+                return   //3. 여기서 함수 종료한다.
+             } 
+           //비어있지않다. //return나오면 else가 필요없어서 지워줄수 있다.
+            if(!numTwo){
+                $result.value = ''; 
+            numTwo += number; 
+            $result.value += number;  //1. 공통된 부분을 넣어준다.
+            }
+        }
+    document.querySelector('#num-0').addEventListener('click',onClickNumber('0'));
+    document.querySelector('#num-1').addEventListener('click',onClickNumber('1'));
+    document.querySelector('#num-2').addEventListener('click',onClickNumber('2'));
+    document.querySelector('#num-3').addEventListener('click',onClickNumber('3'));
+    document.querySelector('#num-4').addEventListener('click',onClickNumber('4'));
+    document.querySelector('#num-5').addEventListener('click',onClickNumber('5'));
+    document.querySelector('#num-6').addEventListener('click',onClickNumber('6'));
+    document.querySelector('#num-7').addEventListener('click',onClickNumber('7'));
+    document.querySelector('#num-8').addEventListener('click',onClickNumber('8'));
+    document.querySelector('#num-9').addEventListener('click',onClickNumber('9'));
+  const onClickOperator = (op) => () => {
+    if(numOne){
+        operator = op;
+        $operator.value = op;
+    }
+    else{
+        alert('숫자를 먼저 입력하세요.');
+    }
+  }
+    document.querySelector('#minus').addEventListener('click',onClickOperator('-'));
+    document.querySelector('#plus').addEventListener('click',onClickOperator('+'));
+    document.querySelector('#divide').addEventListener('click',onClickOperator('/'));
+    document.querySelector('#multiply').addEventListener('click',onClickOperator('*'));
+    
+    document.querySelector('#calculate').addEventListener('click', () => {});
+    document.querySelector('#clear').addEventListener('click',() => { });
 
 
+//고차함수의 예제
+    const a = (event) => { console.log(event.target.value) }
+    document.querySelector('#plus').addEventListener('click', a)
+//이럴경우 a()는 누가 실행해주는거니?   ==> 브라우저가 click시 몰래 a(event)이런식으로
+// event 객체를 만들어서 넣어준다.
 
     // document.querySelector('#num-0').addEventListener('click',(number) => { 
     //    if(operator){ //비어있지 않다.
@@ -210,5 +241,4 @@
     // document.querySelector('#clear').addEventListener('click',() => { } );
     // document.querySelector('#num-0').addEventListener('click',() => { });
     </script>
-</body>
 </html>
