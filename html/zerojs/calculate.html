@@ -100,14 +100,14 @@
     const onClickNumber = (number) => (event) => {    
             if(!operator){  // 2. !을 넣어서 짧은 절차를 먼저 실행하게 넣어준다. //비어있다.
                 numOne += number; 
-                $result.value += number;  //1. 공통된 부분을 넣어준다. 
+                $result.value += number;  //1. if문 다음에 나오는 공통된 부분을 넣어준다. 
                 return   //3. 여기서 함수 종료한다.
              } 
            //비어있지않다. //return나오면 else가 필요없어서 지워줄수 있다.
             if(!numTwo){
                 $result.value = ''; 
             numTwo += number; 
-            $result.value += number;  //1. 공통된 부분을 넣어준다.
+            $result.value += number;  //1. if문 다음에 나오는 공통된 부분을 넣어준다.
             }
         }
     document.querySelector('#num-0').addEventListener('click',onClickNumber('0'));
@@ -133,8 +133,31 @@
     document.querySelector('#plus').addEventListener('click',onClickOperator('+'));
     document.querySelector('#divide').addEventListener('click',onClickOperator('/'));
     document.querySelector('#multiply').addEventListener('click',onClickOperator('*'));
-    
-    document.querySelector('#calculate').addEventListener('click', () => {});
+    //+일때는 문자를 숫자로 인식못해서 parseInt로 숫자로 바꾸어서 계산해주고
+    //-,*,/는 문자를 숫자로 인식하기 때문에 그냥 계산해주면 된다.
+    document.querySelector('#calculate').addEventListener('click', () => {
+        if(numTwo){
+            switch (operator){
+                case '+':
+                    $result.value =  parseInt(numOne) + parseInt(numTwo);
+                    break;
+                case '-':
+                    $result.value = numOne - numTwo;
+                    break;
+                case '*':
+                    $result.value = numOne * numTwo;
+                    break;
+                case '/':
+                    $result.value = numOne / numTwo;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else{
+            alert('숫자를 먼저 입력해주세요.');
+        }
+    });
     document.querySelector('#clear').addEventListener('click',() => { });
 
 
