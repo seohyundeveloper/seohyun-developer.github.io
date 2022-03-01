@@ -158,7 +158,13 @@
             alert('숫자를 먼저 입력해주세요.');
         }
     });
-    document.querySelector('#clear').addEventListener('click',() => { });
+    document.querySelector('#clear').addEventListener('click',() => { 
+        numOne = '';
+        operator = '';
+        numTwo = '';
+        $operator.value = '';
+        $result.value = '';
+    });
 
 
 //고차함수의 예제
