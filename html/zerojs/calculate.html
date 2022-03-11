@@ -153,15 +153,20 @@
                 default:
                     break;
             }
+            $operator.value = '';
+            numOne = $result.value;
+            operator = '';
+            numTwo = '';
         }
         else{
             alert('숫자를 먼저 입력해주세요.');
         }
     });
+    //초기상태로 돌아가도록 설정하기!!
     document.querySelector('#clear').addEventListener('click',() => { 
         numOne = '';
-        operator = '';
         numTwo = '';
+        operator = '';
         $operator.value = '';
         $result.value = '';
     });
@@ -270,5 +275,6 @@
     // document.querySelector('#calculate').addEventListener('click',() => { } );
     // document.querySelector('#clear').addEventListener('click',() => { } );
     // document.querySelector('#num-0').addEventListener('click',() => { });
+
     </script>
 </html>
