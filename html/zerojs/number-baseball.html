@@ -7,15 +7,68 @@
 <title>Number-Baseball-game</title>
 </head>
 <body>
-    <form id="form">
-        <input type="text" id="input">
-        <button>확인</button>
-    </form>
-    <div id="logs"></div>
+  <form id="form">
+      <input type="text" id="input">
+      <button>확인</button>
+  </form>
+  <div id="logs"></div>
+
 <script>
-    const $input = document.querySelector("#input");
-    const $form = document.querySelector("#form");
-    const $logs = document.querySelector("#logs");
+  //$쓰는이유: 아무 의미 없다. 구분하기 위해 사용
+  // querySelector로 html선택한 것을 변수에 넣을때는 $를 붙여준다.
+  const $input = document.querySelector("#input");
+  const $form = document.querySelector("#form");
+  const $logs = document.querySelector("#logs");
+
+  const numbers = [];  //1. 빈배열 (처음에 1-9까지 숫자들이 모여있는 배열이 필요함.)
+   for(let n=1; n<=9; n++){
+     numbers.push(n);
+   }
+  // console.log(numbers)
+  const answer = [];
+  for(let n=0; n<4; n++){
+    const index = Math.floor(Math.random()*numbers.length); //number의 index번호때문에 0-8까지 넣어줌.
+    answer.push(numbers[index]);  // numbers배열에서 숫자 하나씩 뽑아서 answer에 넣어줌.
+    numbers.splice(index,1);  // 중복이 되지 않기 때문에 뽑은 숫자는 제거해준다. 
+    // 이런 방식으로 하다 보면 undefined 값이 나올때가 있다.
+    // 위처럼 진행시 numbers는 숫자가 줄어드는데 index번호는 여전히 0-8번까지라서 없는 인덱스가 나오면
+    // undefinde가 나오게 된다. 그때는 Math.random()*9대신에 Math.random()*numbers.length를 해주면 됨!!
+
+  }
+  console.log(answer,'aa')
+  const tries = [];  
+  //검사하는 코드
+  function checkInput(input) { 
+    if(input.length !==4){  //길이가 4가 아닌가
+      return alert('4자리 숫자를 입력해주세요!');
+    }
+    if(new Set(input).size !==4){  // 중복된 숫자가 있는가
+      return alert('중복되지 않게 입력해 주세요.');  //set에 대한 공부하기!!!
+    }
+    if(tries.includes(input)){  // 이미 시도한 값은 아닌가
+      return alert('이미 시도한 값입니다.');
+    }
+    return true;
+  }
+
+  $form.addEventListener('submit', (event) =>{
+    event.preventDefault();  //기본동작을 막기(form 태그는 submit이라는 이벤트가 일어날때 새로고침 현상이 일어남!!)
+    console.log('submit', event)    //그런 기본동작을 막기위해 event를 변수로 써서 막아준다!!
+    // event.target[0].value  이런식으로 form 태그 안의 0번째 태그의 value값을 가져올수 있다.
+    // 결과적으로는 $input.value와도 같은 값이다.
+    const value = $input.value;  //변수에 저장하고
+    $input.value = '';   //다시 입력하기 쉽게 입력값을 지워준다.
+    // 검사하는 코드를 여기다 쓸수 있지만 함수로 빼준다.
+    const valid = checkInput(value);
+
+    if(checkInput(value)){
+      //입력값 문제 없음.
+      tries.push(value);
+    }
+    else {
+      //에러있음!
+    }
+  })
 </script>  
 </body>
 </html>
