@@ -60,7 +60,16 @@
     $input.value = '';   //다시 입력하기 쉽게 입력값을 지워준다.
     // 검사하는 코드를 여기다 쓸수 있지만 함수로 빼준다.
     const valid = checkInput(value);
-
+    if(!valid) return;
+    if(answer.join('') === value){
+      $logs.textContent = '홈런!!!!';
+      return;
+    }
+    ir(tries.length >=9){
+      const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+      $logs.appendChild(message);
+      return;
+    }
     if(checkInput(value)){
       //입력값 문제 없음.
       tries.push(value);
