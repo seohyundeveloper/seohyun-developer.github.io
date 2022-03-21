@@ -50,7 +50,13 @@
     }
     return true;
   }
+function defeted(){
+  const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+  $logs.appendChild(message);
+}
 
+
+  let out = 0;
   $form.addEventListener('submit', (event) =>{
     event.preventDefault();  //기본동작을 막기(form 태그는 submit이라는 이벤트가 일어날때 새로고침 현상이 일어남!!)
     console.log('submit', event)    //그런 기본동작을 막기위해 event를 변수로 써서 막아준다!!
@@ -74,15 +80,16 @@
       return;
     }
     
-    if(tries.length >=9){ 
-      const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
-      $logs.appendChild(message);  //글씨를 추가하는 방법!!!! appendChild의 경우는 태그를 만들고 추가해줘야한다. 
+    if(tries.length >=9){  
+      defeted()  //중복된 부분은 위에처럼 함수로 빼준다.
+      //  const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+      //  $logs.appendChild(message);  //글씨를 추가하는 방법!!!! appendChild의 경우는 태그를 만들고 추가해줘야한다. 
                                    // 그리고 한번에 한개씩만 할수 있다.
       return;
     }
       tries.push(value);
     
-     //몇 스트라이크 몇 볼인지 검사
+     //몇 스트라이크 몇 볼인지 검사!!
      let strike = 0;
      let ball = 0;
      for(let i=0; i<answer.length; i++){
@@ -93,10 +100,21 @@
          }
          else{  //숫자만 같음!!
           ball += 1;
-        }
-      }
-    }
-    $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+         }
+       }
+     }
+     if(strike === 0 && ball === 0){
+       out++;
+       $logs.append('아웃',document.createElement('br'))
+     }
+     else{
+       $logs.append(`${value}:${strike}스트라이크 ${ball} 볼`, document.createElement('br'));
+     }
+     if(out ===3){
+      defeted()
+      return;
+     }
+   // $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
     tries.push(value);    //append의 경우 한번에 여러개씩 추가하여 넣을수 있다. 문자랑 태그도 함께 넣을수 있다.
   })
 </script>  
