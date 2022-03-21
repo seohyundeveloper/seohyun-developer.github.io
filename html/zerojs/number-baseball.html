@@ -117,6 +117,50 @@ function defeted(){
    // $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
     tries.push(value);    //append의 경우 한번에 여러개씩 추가하여 넣을수 있다. 문자랑 태그도 함께 넣을수 있다.
   })
-</script>  
+ 
+ 
+  // forEach 반복문 설명하기!!
+  const answer2 = [3,1,4,6];
+  const value2 = '3124';
+  let strike2 = 0;
+  let ball2 = 0;
+  answer2.forEach((element, index) => {
+   console.log(element, index);
+  })
+  for(let i=0; i<answer2.length; i++){
+    const index2 = value2.indexOf(answer2[i])
+    if(index2 > -1){  //일치하는 숫자 발견
+         if(index2 === i) {  //자릿수도 같음
+            strike2 += 1;
+         }
+         else{  //숫자만 같음!!
+          ball2 += 1;
+         }
+       }
+  }
+
+  //map => 기존 배열은 수정하지 않고 새로운 변형된 배열이 생긴다.
+  const array = [1,2,3,4];
+  const result = [];
+  for(let i=0; i<4; i++){
+    result.push(array[i]*2);
+  }
+  console.log(result)
+
+  array.map((element,index) => {
+    return element*2;
+  })
+
+
+//fill => 자바스크립트 배열관련 함수!!!
+Array(9) //length가 9 인 빈 배열을 만드는 방법!!
+Array(9).fill(); //undefined가 9개인 빈배열을 만들어줌!!!
+console.log(Array(9).fill())
+
+Array(9).fill(0).map((el,idx) => {
+  return idx + 1;
+})  
+   // ==> 1~9까지를 만들어줄때 이런식으로 만들어줄수 있다.!!!!
+</script>   
 </body>
 </html>
