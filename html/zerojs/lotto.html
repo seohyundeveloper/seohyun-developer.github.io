@@ -23,9 +23,10 @@
     <div id="resutl">추첨결과는? </div>
     <div id="bonus">보너스 : </div>
 <script>
+    //map, slice는 원본은 변하지 않는다.splice는 원본이 수정되버림!!!
     const candidate = Array(45).fill().map((v,i) => i + 1 );  //빈배열 45개 만들기!!! 
     const shuffle = [];
-    //조건이 간단하므로 while문을 사용한다. 몇번 반복할지 확실하지 않을때 쓰는게 좋다!!
+    //조건이 간단하므로 while문을 사용한다. 몇번 반복할지 확실치 않을때 쓰는게 좋다!!
     while(candidate.length > 0){
         const random = Math.floor(Math.random() * candidate.length);  //무작위 인덱스 뽑기
         const spliceArray = candidate.splice(random,1);  //뽑은 값은 배열에 들어있음!!
@@ -33,7 +34,12 @@
         shuffle.push(value);  // shuffle 배열에 넣기
     }
     console.log(shuffle);
-    const winBalls = shuffle.slice(0,6).sort((a,b) => a-b);
+    const winBalls = shuffle.slice(0,6).sort((a,b) => a-b); //6개를 잘라서 정렬하기!!!
+              // sort는 원본을 바꿈!! return값에 따라 정렬함
+              // a-b : 오름차순  b-a : 내림차순
+              // 원본이 바뀌니까 slice를 넣어 원본을 복사하여 정렬함!! 이때는 원본이 바뀌지 않는다!
+              // 글자도 숫자로 바꿔서 정렬이 가능하다.
+              // date정렬도 a-b하면 오름차순으로 동일하게 만들수 있다!!!
     const bonus = shuffle[6];
     console.log(winBalls, bonus);
 </script>
