@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-    <div id="resutl">추첨결과는? </div>
+    <div id="result">추첨결과는? </div>
     <div id="bonus">보너스 : </div>
 <script>
     //map, slice는 원본은 변하지 않는다.splice는 원본이 수정되버림!!!
@@ -42,6 +42,44 @@
               // date정렬도 a-b하면 오름차순으로 동일하게 만들수 있다!!!
     const bonus = shuffle[6];
     console.log(winBalls, bonus);
+
+    // const $result = document.querySelector('#result');
+    // for(let i=0; i<winBalls.length; i++){
+    //   setTimeout (() => {
+    //     const $ball = document.createElement('div');
+    //     $ball.className = 'ball';
+    //     $ball.textContent = winBalls[i];
+    //     $result.appendChild($ball);
+    //   }, 1000 * (i + 1));
+    // }
+    // const $bonus = document.querySelector('#bonus');
+    // setTimeout(() => {
+    //   const $ball = document.createElement('div');
+    //   $ball.className = 'ball';
+    //   $ball.textContent = bonus;
+    //   $result.appendChild($ball);
+    // },7000);
+
+    // 중복되는 내용 있을때 아래와 같이 함수로 빼주면서 바꿔준다!! 
+    // 중복되는 부분을 매개변수로 빼준다!!!
+  const $result = document.querySelector('#result');
+  function drawBall(number, $parent){
+    //console.log(number, $parent, '454545')
+    const $ball = document.createElement('div');
+    $ball.className = 'ball';
+    $ball.textContent = number;
+    $parent.appendChild($ball);
+   }
+
+  for(let i=0; i<winBalls.length; i++){
+   setTimeout(()=>{
+     drawBall(winBalls[i], $result);
+   }, 1000 *(i + 1));
+  }
+  const $bonus = document.querySelector('#bonus');
+   setTimeout(()=>{
+     drawBall(bonus, $bonus);
+   }, 7000);
 </script>
 </body>
 </html>
