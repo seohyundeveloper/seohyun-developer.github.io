@@ -63,8 +63,11 @@
     // 중복되는 내용 있을때 아래와 같이 함수로 빼주면서 바꿔준다!! 
     // 중복되는 부분을 매개변수로 빼준다!!!
   const $result = document.querySelector('#result');
+  const $bonus = document.querySelector('#bonus');
+
   function drawBall(number, $parent){
     //console.log(number, $parent, '454545')
+    
     const $ball = document.createElement('div');
     $ball.className = 'ball';
     $ball.textContent = number;
@@ -76,10 +79,24 @@
      drawBall(winBalls[i], $result);
    }, 1000 *(i + 1));
   }
-  const $bonus = document.querySelector('#bonus');
-   setTimeout(()=>{
-     drawBall(bonus, $bonus);
-   }, 7000);
+  
+  setTimeout(()=>{
+    drawBall(bonus, $bonus);
+  }, 7000);
+  // var & let 의 차이
+  // var 은 함수 스코프를 가지고 있음!! let은 블럭 스코프를 가짐!!
+  // 스코프는 변수의 접근범위를 가리킴!!!
+  // 반복문의 경우 동기이고 setTimeout()의 경우는 비동기임!!!
+  // var와 비동기함수가 만난 경우 클로저를 이용해서 수정해준다... 안에 함수를 만들어준다.
+  // 클로저 : 함수와 함수바깥쪽에 있는 변수와의 관계!!
+  //  for(var i=0; i<winBalls.length; i++){
+  //   (function(j){   // j는 매개변수인데 이 함수안에 갇힌다... 
+  //       setTimeout(()=>{
+  //         drawBall(winBalls[i], $result);
+  //       }, (i + 1)*1000);
+  //     })(i);
+  //   }
+ 
 </script>
 </body>
 </html>
