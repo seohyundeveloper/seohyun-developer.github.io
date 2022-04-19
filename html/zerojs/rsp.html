@@ -27,9 +27,9 @@
     const $scissor = document.querySelector("#scissor");
     const $paper = document.querySelector("#paper");
     const IMG_URL = './rsp.png';
-    $computer.style.background = `url(${IMG_URL}) 0 0`; // 이미지,backgroundposition(x좌표, y좌표)
-    $computer.style.background = `url(${IMG_URL}) -220px 0`;
-    $computer.style.background = `url(${IMG_URL}) -440px 0`;
+    // $computer.style.background = `url(${IMG_URL}) 0 0`; // 이미지,backgroundposition(x좌표, y좌표)
+    // $computer.style.background = `url(${IMG_URL}) -220px 0`;
+    // $computer.style.background = `url(${IMG_URL}) -440px 0`;
     $computer.style.backgroundSize = 'auto 200px'; //backgroudsize 가로너비, 세로높이
 
     
@@ -43,23 +43,52 @@
         rock:'-220px',  //바위
         paper:'-440px',  //보
     }
-    let coord = 0;
-
+/*    
+    let computerChoice = 'scissors';
     setInterval( () => {
-        if(coord === rspX.scissors){ //가위
-            coord = rspX.rock;  //데이터를 바꿔준다.
-            $computer.style.background = `url(${IMG_URL}) ${rspX.rock} 0`;  //화면도 바꿔준다.
-            $computer.style.backgroundSize = 'auto 200px';
-        } else if(coord === rspX.rock){ //바위
-            coord = rspX.paper;
-            $computer.style.background = `url(${IMG_URL}) ${rspX.paper} 0`;
-            $computer.style.backgroundSize = 'auto 200px';
-        } else{
-            coord = rspX.scissors; //보
-            $computer.style.background = `url(${IMG_URL}) ${rspX.scissors} 0`;
-            $computer.style.backgroundSize = 'auto 200px';
+        if (computerChoice === rspX.scissors){ //가위
+         computerChoice = rspX.rock;  //데이터를 바꿔준다.
+            // $computer.style.background = `url(${IMG_URL}) ${rspX.rock} 0`;  //화면도 바꿔준다.
+            // $computer.style.backgroundSize = 'auto 200px';
+        } else if (computerChoice === rspX.rock){ //바위
+         computerChoice = rspX.paper;
+            // $computer.style.background = `url(${IMG_URL}) ${rspX.paper} 0`;
+            // $computer.style.backgroundSize = 'auto 200px';
+        } else if (computerChoice === rspX.scissors){
+         computerChoice = rspX.scissors; //보
+            // $computer.style.background = `url(${IMG_URL}) ${rspX.scissors} 0`;
+            // $computer.style.backgroundSize = 'auto 200px';
         }
+        //중복을 제거하여 변수로 받아서 써준다.
+        //rspX.computerChoice ==> 문자열을 의미함. rspX.["computerChoice"]와 동일함.
+        //문자열 속성을 찾게되므로 없으므로 오류가 남!!!!
+        //여기서 이렇게 하면 안된다. 변수값이니깐 저렇게 써주면 안된다.
+        $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
+        $computer.style.backgroundSize = 'auto 200px';
     }, 50);
+    아래처럼 함수형태로 바꿔서 써준다.
+*/
+let computerChoice = 'scissors';
+    const changeComputerHand = () => {
+        if (computerChoice === rspX.scissors){
+            computerChoice = rspX.rock;
+        } else if(computerChoice === rspX.rock){
+            computerChoice = rspX.paper;
+        } else if(computerChoice === rspX.scissors) {
+            computerChoice = rspX.scissors;
+        }
+        $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
+        $computer.style.backgroundSize = 'auto 200px';
+      //setTimeout(changeComputerHand, 50);
+    }
+   // setTimeout(changeComputerHand, 50);
+    setInterval(changeComputerHand, 50);
+    //changeComputerHand() 이런형태로 써주면 안된다. 
+    //함수에 함수를 호출해버리면 리턴값이 들어가게 된다. 
+    // 리턴값이 undefinded뜨는데 함수는 undefinded되면 안된다. 
+
+    // setInterval(changeComputerHand, 50);은 setTimeout으로 쓸수있다.
+    //setTimeout(changeComputerHand, 50);처럼 자기가 자기를 호출하는 재귀함수 형태!
 </script>
 </body>
 </html>
