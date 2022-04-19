@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="KO">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock/Paper/Scissors</title>
+<style>
+    #computer{
+        width: 142px;
+        height: 200px;
+    }
+</style>
+</head>
+<body>
+    <div id="computer"></div>
+    <div>
+        <button id="scissor" class="btn">가위</button>
+        <button id="rock" class="btn">바위</button>
+        <button id="paper" class="btn">보</button>
+    </div>
+    <div id="score">0</div>
+<script>
+    const $computer = document.querySelector("#computer");
+    const $score = document.querySelector("#score");
+    const $rock = document.querySelector("#rock");
+    const $scissor = document.querySelector("#scissor");
+    const $paper = document.querySelector("#paper");
+    const IMG_URL = './rsp.png';
+    $computer.style.background = `url(${IMG_URL}) 0 0`; // 이미지,backgroundposition(x좌표, y좌표)
+    $computer.style.background = `url(${IMG_URL}) -220px 0`;
+    $computer.style.background = `url(${IMG_URL}) -440px 0`;
+    $computer.style.backgroundSize = 'auto 200px'; //backgroudsize 가로너비, 세로높이
+
+    
+    // const scissorsX = '0'; //가위    
+    // const rockX = '-220px'; //바위
+    // const paperX = '-440px'; //보 
+
+    //하나의 객체형태로 사용하려면 아래처럼 쓴다. 변수명은 고유명으로 사용!!
+    const rspX = {
+        scissors:'0',  //가위   
+        rock:'-220px',  //바위
+        paper:'-440px',  //보
+    }
+    let coord = 0;
+
+    setInterval( () => {
+        if(coord === rspX.scissors){ //가위
+            coord = rspX.rock;  //데이터를 바꿔준다.
+            $computer.style.background = `url(${IMG_URL}) ${rspX.rock} 0`;  //화면도 바꿔준다.
+            $computer.style.backgroundSize = 'auto 200px';
+        } else if(coord === rspX.rock){ //바위
+            coord = rspX.paper;
+            $computer.style.background = `url(${IMG_URL}) ${rspX.paper} 0`;
+            $computer.style.backgroundSize = 'auto 200px';
+        } else{
+            coord = rspX.scissors; //보
+            $computer.style.background = `url(${IMG_URL}) ${rspX.scissors} 0`;
+            $computer.style.backgroundSize = 'auto 200px';
+        }
+    }, 50);
+</script>
+</body>
+</html>
