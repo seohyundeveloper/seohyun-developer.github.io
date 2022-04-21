@@ -99,14 +99,21 @@
      //clickButton 5번 호출 , 인터벌아이디 1번,2번,3번,4번,5번(아이디에 마지막 5번만 저장되어있음)
      //clearInterval 실행해 실제 5번만 취소됨. 나머지는 계속 손을 돌리고 있음
      //계속 하다보면 손이 더 빠르게 돌아가고 있는 버그가 발생하게 된다. 
-     //따라서  
-     const clickButton = () => {
+     //따라서 removeEventListener 를 이용해서 1초동안 click 이벤트를 못하게 막아준다.
+     let clickable = true; 
+     // clickable 변수(플래그변수) 만들어 버튼을 클릭한 동안에는 false로 만든다.
+     if(clickable){
+        const clickButton = () => {
             clearInterval(intervalId);
+            clickable = false;
+          /*
             $rock.removeEventListener('click', clickButton);
             $scissor.removeEventListener('click', clickButton);
             $paper.removeEventListener('click',clickButton);
+         */
             //점수 계산 및 화면 표시
             setTimeout( () => {
+              clickable = true;
                 // clearInterval(intervalId);
                 //위의 removeEventListener 쓰는대신 setTimeout을 꺼주면 된다.
                 intervalId = setInterval(changeComputerHand, 50);
@@ -114,9 +121,22 @@
             //버튼을 여러번 누르면 setTimeout도 여러번 호출되게 된다.
             //
         };
+     }
+    
         $rock.addEventListener('click', clickButton);
         $scissor.addEventListener('click', clickButton);
         $paper.addEventListener('click',clickButton);
+
+
+    // {} === {} 이럴때는 false가 나온다. 
+    // 이럴때는 객체를 변수에 넣어서 참조를 해줘야 true로 나온다.
+    //객체파트를 다시 복습하자!! 객체의 참조를 공부
+    //객체의 참조관계를 유지하고 싶으면 변수에 넣어서 변수를 재사용해라!!!
+    // const a = {};
+    // const b = a;
+    // a === b  이때는 true라고 나오게 된다.
+
+
     </script>
 </body>
 </html>
