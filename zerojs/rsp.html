@@ -105,7 +105,7 @@
      if(clickable){
         const clickButton = () => {
             clearInterval(intervalId);
-            clickable = false;
+            clickable = false; 
           /*
             $rock.removeEventListener('click', clickButton);
             $scissor.removeEventListener('click', clickButton);
@@ -113,7 +113,7 @@
          */
             //점수 계산 및 화면 표시
             setTimeout( () => {
-              clickable = true;
+              clickable = true; //여기서도 true로 만들어준다.
                 // clearInterval(intervalId);
                 //위의 removeEventListener 쓰는대신 setTimeout을 꺼주면 된다.
                 intervalId = setInterval(changeComputerHand, 50);
