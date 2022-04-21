@@ -26,10 +26,10 @@
         const $rock = document.querySelector("#rock");
         const $scissor = document.querySelector("#scissor");
         const $paper = document.querySelector("#paper");
-        const img='./rsp.png';
-        // $computer.style.background = `url(${img}) 0 0`; // 이미지,backgroundposition(x좌표, y좌표)
-        // $computer.style.background = `url(${img}) -220px 0`;
-        // $computer.style.background = `url(${img}) -440px 0`;
+        const IMG_URL='./rsp.png';
+        $computer.style.background = `url(${IMG_URL}) 0 0`; // 이미지,backgroundposition(x좌표, y좌표)
+        // $computer.style.background = `url(${IMG_URL}) -220px 0`;
+        // $computer.style.background = `url(${IMG_URL}) -440px 0`;
         $computer.style.backgroundSize = 'auto 200px'; //backgroudsize 가로너비, 세로높이
     
         
@@ -48,47 +48,75 @@
         setInterval( () => {
             if (computerChoice === rspX.scissors){ //가위
              computerChoice = rspX.rock;  //데이터를 바꿔준다.
-                // $computer.style.background = `url(${img}) ${rspX.rock} 0`;  //화면도 바꿔준다.
+                // $computer.style.background = `url(${IMG_URL}) ${rspX.rock} 0`;  //화면도 바꿔준다.
                 // $computer.style.backgroundSize = 'auto 200px';
             } else if (computerChoice === rspX.rock){ //바위
              computerChoice = rspX.paper;
-                // $computer.style.background = `url(${img}) ${rspX.paper} 0`;
+                // $computer.style.background = `url(${IMG_URL}) ${rspX.paper} 0`;
                 // $computer.style.backgroundSize = 'auto 200px';
             } else if (computerChoice === rspX.scissors){
              computerChoice = rspX.scissors; //보
-                // $computer.style.background = `url(${img}) ${rspX.scissors} 0`;
+                // $computer.style.background = `url(${IMG_URL}) ${rspX.scissors} 0`;
                 // $computer.style.backgroundSize = 'auto 200px';
             }
             //중복을 제거하여 변수로 받아서 써준다.
             //rspX.computerChoice ==> 문자열을 의미함. rspX.["computerChoice"]와 동일함.
             //문자열 속성을 찾게되므로 없으므로 오류가 남!!!!
             //여기서 이렇게 하면 안된다. 변수값이니깐 저렇게 써주면 안된다.
-            $computer.style.background = `url(${img}) ${rspX[computerChoice]} 0`;
+            $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
             $computer.style.backgroundSize = 'auto 200px';
         }, 50);
         아래처럼 함수형태로 바꿔서 써준다.
     */
     let computerChoice = 'scissors';
         const changeComputerHand = () => {
-            if (computerChoice === rspX.scissors){
-                computerChoice = rspX.rock;
-            } else if(computerChoice === rspX.rock){
-                computerChoice = rspX.paper;
-            } else if(computerChoice === rspX.scissors) {
-                computerChoice = rspX.scissors;
+            if (computerChoice === 'rock'){
+                computerChoice = 'scissors';
+            } else if(computerChoice === 'scissors'){
+                computerChoice = 'paper';
+            } else if(computerChoice === 'paper') {
+                computerChoice = 'rock';
             }
-            $computer.style.background = `url(${img}) ${rspX[computerChoice]} 0`;
+            $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
             $computer.style.backgroundSize = 'auto 200px';
           //setTimeout(changeComputerHand, 50);
         }
        // setTimeout(changeComputerHand, 50);
-        setInterval(changeComputerHand, 50);
+       // setInterval(changeComputerHand, 50);
         //changeComputerHand() 이런형태로 써주면 안된다. 
         //함수에 함수를 호출해버리면 리턴값이 들어가게 된다. 
         // 리턴값이 undefinded뜨는데 함수는 undefinded되면 안된다. 
     
         // setInterval(changeComputerHand, 50);은 setTimeout으로 쓸수있다.
         //setTimeout(changeComputerHand, 50);처럼 자기가 자기를 호출하는 재귀함수 형태!
+
+        let intervalId = setInterval(changeComputerHand, 50)
+     //setInterval이나 setTimeout함수는 리턴값이 있다. 리턴값을 받아와서
+     //clearInterval 이나 clearTimeout을 이용해준다.
+     //clearTimeout은 setTimeout함수에 인수로 넣은 함수가 실행되기 전에 호출되어야한다.
+     //왜냐면 이미 일어난일을 취소할수 없기 때문에 일어나기 전에 취소해줘야 한다.
+
+     //clickButton 5번 호출 , 인터벌아이디 1번,2번,3번,4번,5번(아이디에 마지막 5번만 저장되어있음)
+     //clearInterval 실행해 실제 5번만 취소됨. 나머지는 계속 손을 돌리고 있음
+     //계속 하다보면 손이 더 빠르게 돌아가고 있는 버그가 발생하게 된다. 
+     //따라서  
+     const clickButton = () => {
+            clearInterval(intervalId);
+            $rock.removeEventListener('click', clickButton);
+            $scissor.removeEventListener('click', clickButton);
+            $paper.removeEventListener('click',clickButton);
+            //점수 계산 및 화면 표시
+            setTimeout( () => {
+                // clearInterval(intervalId);
+                //위의 removeEventListener 쓰는대신 setTimeout을 꺼주면 된다.
+                intervalId = setInterval(changeComputerHand, 50);
+            }, 1000);
+            //버튼을 여러번 누르면 setTimeout도 여러번 호출되게 된다.
+            //
+        };
+        $rock.addEventListener('click', clickButton);
+        $scissor.addEventListener('click', clickButton);
+        $paper.addEventListener('click',clickButton);
     </script>
 </body>
 </html>
