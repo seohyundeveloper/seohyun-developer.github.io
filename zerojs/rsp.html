@@ -143,6 +143,19 @@
 // 이런경우는 이렇게 줄여쓸수 있다.
 // ['고양이',  '사자', '강아지', '거북이'].includes(diff) 쓰면 true, false로 반환됨
 // ['고양이',  '사자', '강아지', '거북이'].indexOf(diff) > -1 과 같은뜻
+           let message;
+           if([2, -1].includes(diff)){
+               score += 1;
+               message = '승리';
+           }
+           else if([2, 1].includes(diff)){
+               score -= 1;
+               message = '패배';
+           }
+           else {
+               message = '무승부';
+           }
+           $score.textContent = `${message} 총 : ${score} 점`;
             setTimeout( () => {
                 clickable = true; //여기서도 true로 만들어준다.
                     // clearInterval(intervalId);
@@ -167,7 +180,7 @@
     // const b = a;
     // a === b  이때는 true라고 나오게 된다.
 
-
+//코드골프라고 찾아보면 자바스크립트의 잡지식이 늘수있다.
     </script>
 </body>
 </html>
