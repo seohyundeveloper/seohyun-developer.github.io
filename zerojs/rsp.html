@@ -101,6 +101,7 @@
      //계속 하다보면 손이 더 빠르게 돌아가고 있는 버그가 발생하게 된다. 
      //따라서 removeEventListener 를 이용해서 1초동안 click 이벤트를 못하게 막아준다.
      let clickable = true; 
+     let score = 0;
      // clickable 변수(플래그변수) 만들어 버튼을 클릭한 동안에는 false로 만든다.
      // 승리할때 어떤식으로 처리할 것인가.. 문자로 하게되면 너무 복잡하고 중복이 많이 됨
      // 이럴때는 숫자를 대입하여 사칙연산을 통해서 공통점을 찾아내서 코드의 복잡성을 줄일수 있다.
@@ -130,7 +131,7 @@
             const diff = myScore - computerScore;
         // 2,-1은 승리조건이고, -2,1은 패배조건, 점수표 참고(책 298페이지)
          //   if(diff === 2 || diff === -1 ){
-            if([2, -1].includes(difff)) {   
+            if([2, -1].includes(diff)) {   
                 console.log('승리');
             } 
             else if(diff === -2 || diff === 1){
@@ -148,19 +149,19 @@
                score += 1;
                message = '승리';
            }
-           else if([2, 1].includes(diff)){
+           else if([-2, 1].includes(diff)){
                score -= 1;
                message = '패배';
            }
            else {
                message = '무승부';
            }
-           $score.textContent = `${message} 총 : ${score} 점`;
+           $score.textContent = `${message} 총: ${score} 점`;
             setTimeout( () => {
                 clickable = true; //여기서도 true로 만들어준다.
                     // clearInterval(intervalId);
                     //위의 removeEventListener 쓰는대신 setTimeout을 꺼주면 된다.
-                    intervalId = setInterval(changeComputerHand, 50);
+                intervalId = setInterval(changeComputerHand, 50);
             }, 1000);
             //버튼을 여러번 누르면 setTimeout도 여러번 호출되게 된다.
             //
