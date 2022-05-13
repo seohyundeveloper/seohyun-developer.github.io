@@ -163,11 +163,11 @@
            else {
                message = '무승부';
            }
-           if(me === 3){
+           if(me >= 3){
                $score.textContent = `나의 승리 ${me}:${computer}`;
                //setTimeout파트가 없으므로 게임이 끝나서 손가락이 멈춤
            }
-           else if(computer ===3) {
+           else if(computer >=3) {
                $score.textContent = `컴퓨터의 승리 ${me}:${computer}`;
                //setTimeout파트가 없으므로 게임이 끝나서 손가락이 멈춤
            }
