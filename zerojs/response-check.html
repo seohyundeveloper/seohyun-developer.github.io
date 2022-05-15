@@ -34,7 +34,10 @@
       // new Date(2021,2,31)  === 년/월/일 월을 0부터 시작!! 여기서 2는 3월임을 의미함.
        let startTime;  //시작시간  //변수 선언시 전역스코프로 써준다. 시작/끝시간이 다른스코프에 있어서
        let endTime;   //끝시간      
-
+       const records = []; // 반응속도를 배열에 저장해줌
+       //배열을 쓸것인가 객체 리터럴을 쓸것인가에 대해 고민해야한다. 둘다 여러개의 변수를 하나로 묶어놓는 역할이다.
+       //배열은 비슷한것들끼리 묶이고, 객체 리터럴은 다른속성이라 이름을 붙여서 구분해줘야할때 많이 쓰인ㄷ.
+       //여기서는 모두 속도차이이기 때문에 배열에 저장하게 된다.
     //    $screen.addEventListener('click',(event) => {
     //         if($screen.event.target.classList.contains('waiting')){
     //             event.target이 $screen과 동일함!!
@@ -68,7 +71,14 @@
                //끝시간 재기
                //시간 차이 저장하기
                endTime = new Date()  //끝시간 잰다.
-               $result.textContent = `${endTime - startTime}ms`; 
+
+            const current =  endTime - startTime;  //시간차이를 구해준다.
+            records.push(current);  // 차이를 배열에 계속해서 넣어준다.
+            const average = records.reduce((a,c) => a+c)/records.length;  //평균구하기!!!
+            $result.textContent = `현재${current}ms,  평균${average}ms`;
+            startTime = null; //혹시나 버그가 나서 다른 값이 들어있을까바 초기화시켜줌!
+            endTime = null; //혹시나 버그가 나서 다른 값이 들어있을까바 초기화시켜줌!
+             //  $result.textContent = `${endTime - startTime}ms`;  // 평균내기 전에 시간차이를 출력해주려고 코딩!!
                //시간 계산시 ms로 나오기 때문에 1000(ms)으로 나누고 sec가 나오고
                // 60으로 나누면 min 이 나오고 60으로 나누면 hour이 나오고
                // 24로 나누면 일수가 나온다. 
@@ -78,8 +88,11 @@
                $screen.classList.add('waiting');
                $screen.textContent = '클릭해서 시작해주세요.';
            }
-       })
-
+       });
+       //reduce에 대해 공부해보도록 하자!!!(316p 참고하기)=> 만능 메소드임!!!
+    //  여러가지 역할이 있는데 그중 하나는 배열을 객체 리터럴로 바꿀수가 있다.
+    //  ['철수','영희','현영','한솔'].reduce((a,c,i) => { a[i] = c; return a}, {})
+    //  { 0:'철수', 1:'영희', 2:'현영', 3:'한솔' } 이렇게 객체 리터럴로 출력가능하다.
        </script>
 </body>
 </html>
