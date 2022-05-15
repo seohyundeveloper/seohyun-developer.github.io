@@ -32,8 +32,8 @@
        const $result = document.querySelector("#result");
       // 시간을 재려고 할때 new Date() 이용한다. 
       // new Date(2021,2,31)  === 년/월/일 월을 0부터 시작!! 여기서 2는 3월임을 의미함.
-       let startTime;  //시작시간
-       let endTime;   //끝시간
+       let startTime;  //시작시간  //변수 선언시 전역스코프로 써준다. 시작/끝시간이 다른스코프에 있어서
+       let endTime;   //끝시간      
 
     //    $screen.addEventListener('click',(event) => {
     //         if($screen.event.target.classList.contains('waiting')){
@@ -68,12 +68,18 @@
                //끝시간 재기
                //시간 차이 저장하기
                endTime = new Date()  //끝시간 잰다.
-               $result.textContent = `${endTime - startTime}`;
+               $result.textContent = `${endTime - startTime}ms`; 
+               //시간 계산시 ms로 나오기 때문에 1000(ms)으로 나누고 sec가 나오고
+               // 60으로 나누면 min 이 나오고 60으로 나누면 hour이 나오고
+               // 24로 나누면 일수가 나온다. 
+               //예를 들어서  (new Date(2021,2,3)-new Date(2021,1,21))/1000/60/60/24
+               //이렇게 바꿔주면 10일차이가 난다고 답이 나온다.
                $screen.classList.remove('now');
                $screen.classList.add('waiting');
                $screen.textContent = '클릭해서 시작해주세요.';
            }
        })
+
        </script>
 </body>
 </html>
