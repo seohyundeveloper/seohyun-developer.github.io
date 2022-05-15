@@ -30,7 +30,10 @@
    <script>
        const $screen = document.querySelector("#screen");
        const $result = document.querySelector("#result");
-
+      // 시간을 재려고 할때 new Date() 이용한다. 
+      // new Date(2021,2,31)  === 년/월/일 월을 0부터 시작!! 여기서 2는 3월임을 의미함.
+       let startTime;  //시작시간
+       let endTime;   //끝시간
 
     //    $screen.addEventListener('click',(event) => {
     //         if($screen.event.target.classList.contains('waiting')){
@@ -41,6 +44,7 @@
        $screen.addEventListener('click',function(){
         if($screen.classList.contains('waiting')){  //파랑
                //대기화면
+               startTime = new Date() // 시작 시간을 잰다.
                $screen.classList.remove('waiting');
                $screen.classList.add('ready');
                $screen.textContent = '초록색이 되면 클릭하세요.'
@@ -53,6 +57,7 @@
                    $screen.classList.remove('ready'); 
                    $screen.classList.add('now');
                    $screen.textContent = '클릭하세요.'
+                   //시간재기 시작
                }, Math.floor(Math.random()*1000) + 2000);  //2000~3000사이수
            }
            else if($screen.classList.contains('ready')){  //빨강
@@ -60,8 +65,15 @@
            }
            else if($screen.classList.contains('now')){  //초록
                //클릭화면
+               //끝시간 재기
+               //시간 차이 저장하기
+               endTime = new Date()  //끝시간 잰다.
+               $result.textContent = `${endTime - startTime}`;
+               $screen.classList.remove('now');
+               $screen.classList.add('waiting');
+               $screen.textContent = '클릭해서 시작해주세요.';
            }
        })
-   </script>
+       </script>
 </body>
 </html>
