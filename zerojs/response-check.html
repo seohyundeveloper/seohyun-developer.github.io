@@ -81,6 +81,19 @@
             records.push(current);  // 차이를 배열에 계속해서 넣어준다.
             const average = records.reduce((a,c) => a+c)/records.length;  //평균구하기!!!
             $result.textContent = `현재${current}ms,  평균${average}ms`;
+
+//셀프테스트  
+        const topFive = records.sort((p,c) => p-c).slice(0,5);  // 오름차순으로 정렬해서 5개만 잘라서 사용!!!
+        //배열에 대한 반복문을 돌리게 된다.
+        topFive.forEach((top, index) =>{   // p:이전, c:현재 (매개변수)  0부터 5개를 자르니깐 0,1,2,3,4임!!!
+            $result.append(
+                document.createElement('br'),
+                `${index + 1}위 : ${top}ms`,
+            );
+        });
+
+
+
             startTime = null; //혹시나 버그가 나서 다른 값이 들어있을까바 초기화시켜줌!
             endTime = null; //혹시나 버그가 나서 다른 값이 들어있을까바 초기화시켜줌!
              //  $result.textContent = `${endTime - startTime}ms`;  // 평균내기 전에 시간차이를 출력해주려고 코딩!!
