@@ -78,6 +78,7 @@
                endTime = new Date()  //끝시간 잰다.
 
             const current =  endTime - startTime;  //시간차이를 구해준다.
+           // debugger  // 구체적으로 디버깅을 할수 있다.
             records.push(current);  // 차이를 배열에 계속해서 넣어준다.
             const average = records.reduce((a,c) => a+c)/records.length;  //평균구하기!!!
             $result.textContent = `현재${current}ms,  평균${average}ms`;
@@ -91,8 +92,6 @@
                 `${index + 1}위 : ${top}ms`,
             );
         });
-
-
 
             startTime = null; //혹시나 버그가 나서 다른 값이 들어있을까바 초기화시켜줌!
             endTime = null; //혹시나 버그가 나서 다른 값이 들어있을까바 초기화시켜줌!
