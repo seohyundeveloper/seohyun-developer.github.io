@@ -56,7 +56,7 @@
         // 0 <= x < 1 
         // 0*1000+2000 <= x*1000+2000 < 1*1000+2000
         // 2000 <= x*1000+2000 < 3000  이때 Math.floor해주면 2000~2999의 자연수가 된다.
-           timeoutId = setTimeout(function(){
+           timeoutId = setTimeout(function(){  //성급한 클릭 막기위해서 시간을 걸어주게 된다.
             startTime = new Date() // 시작 시간을 잰다.
                    $screen.classList.remove('ready'); 
                    $screen.classList.add('now');
@@ -66,7 +66,7 @@
            }
            else if($screen.classList.contains('ready')){  //빨강
                //준비화면
-               clearTimeout(timeoutId);
+               clearTimeout(timeoutId);   // 꼭 시간함수 사용했으므로 제거도 clearTimeout으로 제거해준다.!!!
                $screen.classList.remove('ready');
                $screen.classList.add('waiting');
                $screen.textContent = '너무 성급하시군요!';
@@ -98,6 +98,11 @@
     //  여러가지 역할이 있는데 그중 하나는 배열을 객체 리터럴로 바꿀수가 있다.
     //  ['철수','영희','현영','한솔'].reduce((a,c,i) => { a[i] = c; return a}, {})
     //  { 0:'철수', 1:'영희', 2:'현영', 3:'한솔' } 이렇게 객체 리터럴로 출력가능하다.
+    
+    //new Date().getFullYear()  ==> 이렇게 쓰면 2022년이 나온다.
+    // getDate(), getHours(), getMonth(), getMinutes(), getseconds()여러가지 형태로 쓸수있다.
+       
+       
        </script>
 </body>
 </html>
