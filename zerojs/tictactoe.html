@@ -19,20 +19,63 @@
 </head>
 <body>
    <script>
+       const {body} = document;  //최신문법임!!document라는 객체안에 body라는 속성이 들어있다.
+    //구조분해 할당을 통해서 코드를 줄여서 써줄수가 있다. (속성이름과 변수명이 동일해야한다.)
+    // 배열도 가능하다. (배열에 대한 구조분해 할당)
+    // const arr=[0,1,2,3,4]
+    //    const one =arr[0]
+    //    const two =arr[1]
+    //    const three =arr[2]
+    //    const four =arr[3]
+    //    const five =arr[4]
+    //    const {one, two, three, four, five} = arr; // 이렇게 많이 써준다.
+    //  만약 필요한게 일부라면 const {one, , three, , five} = arr
+   // 위처럼 써주면 되는데 자릿수는 맞춰서 써줘야한다.!!!!!
+//    const obj = {
+//        a:'hello',
+//        b:{
+//            c:'hi',
+//            d: {
+//                e:'wow'
+//            }
+//        }
+//    }
+    //여기서 구조 분해 할당을 이용해서 a,c,e를 나타내보자
+    // const {a,b: { c, d: { e }}} = obj;
+    // const a = obj.a;
+    // const c = obj.b.c;
+    // const e = obj.b.d.e;  //이 세줄을 위의 한줄로 줄여서 쓸수가 있다.
+
+//또다른 예제 a,b,e  (주의 : 콜론 쓰게되면 b의 경우 변수 할당이 안된다. 따라서 두번에 나눠서 써준다.)
+//     const {a, b} = obj;
+//    const {d:{e}} = b;
+
+    //    const $table = document.createElement('table');
+    //    const $result = document.createElement('div')
+  //아래처럼 줄여서 쓸수가 있다.
+    const $table = document.createElement('table');
+    const $result = document.createElement('div')
+    const rows = [];
+
        let turn = 'o'; // 첫사람은 o 표시
-       const data = [];
-       for(let i=0; i < 3; i++){
-           data.push([]);
-       }
+    //    const data = [];  //데이터를 넣어준부분인데 위에 rows를 만들고 cell을 만들어 처리
+    //    for(let i=0; i < 3; i++){
+    //        data.push([]);
+    //    }
        //테이블 자바스크립트로 만들기!!! 
-       const $table = document.createElement('table');
+       // const $table = document.createElement('table');  //맨위로 보내준다.
        for(let i=0; i < 3; i++){
-           const $tr = document.createElement('tr');
-           for(let i=0; i < 3; i++){
-               const $td = document.createElement('td')
+         //  const $tr = document.createElement('tr');
+           const $tr =  document.createElement('tr');
+           const cells = [];
+           for(let j=0; j < 3; j++){
+             //  const $td = document.createElement('td')
+               const $td =  document.createElement('td');
+               cells.push($td);
+               $tr.appendChild($td);
                $td.addEventListener('click', (event) => {  //칸을 클릭하면 클릭되도록 이벤트를 만들어줌!
                 //칸에 글자가 있나?=> 이것을 확인하기
-                if(event.target.textContent) return;    
+                if(event.target.textContent) return;    //조건에 해당안되면 종료되도록 해준다.
                 console.log('clicked')
                    event.target.textContent = turn;
                 //승부확인하기
@@ -42,11 +85,13 @@
                        turn = 'o';  // turn을 o로 바꿔준다.
                    }
                })
-               $tr.append($td)
+               // $tr.append($td)
            }
+           rows.push(cells);
            $table.append($tr)
        }
        document.body.append($table);
+       document.body.append($result);
    </script>
 </body>
 </html>
