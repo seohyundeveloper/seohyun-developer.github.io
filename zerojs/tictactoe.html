@@ -5,8 +5,48 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TICTACTOE</title>
+<style>
+    table{
+        border-collapse: collapse;
+    }
+    td{
+        border:1px solid maroon;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+    }
+</style>
 </head>
 <body>
-    dsf
+   <script>
+       let turn = 'o'; // 첫사람은 o 표시
+       const data = [];
+       for(let i=0; i < 3; i++){
+           data.push([]);
+       }
+       //테이블 자바스크립트로 만들기!!! 
+       const $table = document.createElement('table');
+       for(let i=0; i < 3; i++){
+           const $tr = document.createElement('tr');
+           for(let i=0; i < 3; i++){
+               const $td = document.createElement('td')
+               $td.addEventListener('click', (event) => {  //칸을 클릭하면 클릭되도록 이벤트를 만들어줌!
+                //칸에 글자가 있나?=> 이것을 확인하기
+                if(event.target.textContent) return;    
+                console.log('clicked')
+                   event.target.textContent = turn;
+                //승부확인하기
+                   if(turn === 'o') {
+                       turn = 'x';  // turn을 x로 바꿔준다.
+                   }else if(turn === 'x') {
+                       turn = 'o';  // turn을 o로 바꿔준다.
+                   }
+               })
+               $tr.append($td)
+           }
+           $table.append($tr)
+       }
+       document.body.append($table);
+   </script>
 </body>
 </html>
