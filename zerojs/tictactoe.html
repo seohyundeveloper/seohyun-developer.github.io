@@ -18,7 +18,13 @@
 </style>
 </head>
 <body>
-   <script>
+    <!-- <header >
+        <div>
+            <button>클릭</button>
+        </div>
+    </header> -->
+
+ <script>
        const {body} = document;  //최신문법임!!document라는 객체안에 body라는 속성이 들어있다.
     //구조분해 할당을 통해서 코드를 줄여서 써줄수가 있다. (속성이름과 변수명이 동일해야한다.)
     // 배열도 가능하다. (배열에 대한 구조분해 할당)
@@ -59,15 +65,19 @@
 
        let turn = 'o'; // 첫사람은 o 표시
 
+       // callback을 함수로 빼서 써주었다.
        const callback = (event) => {
+        // event.stopPropagation();  //이벤트 버블링을 막기위해서 사용할 수 있다.
            if(event.target.textContent !==''){  // 칸이 이미 채워져 있는가?
                console.log('빈칸이 아닙니다.');
            }
            else{  //빈칸이면?
                console.log('빈칸입니다.');
-               event.target.textContent = turn;
-               turn = turn === 'X' ? 'o'  : 'x';
+               event.target.textContent = turn;    //event.target하면 이벤트 버블링 현상에 의해 table에 addEventListener했어도 td에 작동이 된다.
+                                                   //하지만 정확하게 table에만 일어나게 할꺼면 event.currentTarget을 써주면 td가 아닌 table에 일어난다.
+               turn = (turn === 'x' ? 'o' : 'x');  //연산자에도 우선순위가 있어서 괄호 활용
            }
+
        }
 
 
@@ -93,10 +103,10 @@
            for(let j=0; j < 3; j++){
              //  const $td = document.createElement('td')
                const $td =  document.createElement('td');
-
-               $td.addEventListener('click',callback);
-
+            //원래 여기서 addEventListener를 해줬었다.
+            //버그가 날 확률이 높아서 이벤트 버블링이 있어서 아래처럼 table에 callback을 걸어준다.
                cells.push($td);
+            //   $td.addEventListener('click', callback)  이벤트 버를링이랑 연관됨.(html의 특징) removeEventListener를 계속 걸어줘야 한다. 
                $tr.appendChild($td);
 
             //    $td.addEventListener('click', (event) => {  //칸을 클릭하면 클릭되도록 이벤트를 만들어줌!
@@ -105,21 +115,37 @@
             //           console.log('clicked')
             //        event.target.textContent = turn;
             //     //승부확인하기
+            
             //        if(turn === 'o') {
             //            turn = 'x';  // turn을 x로 바꿔준다.
             //        }
             //        else if(turn === 'x') {
             //            turn = 'o';  // turn을 o로 바꿔준다.
             //        }
+            //    삼항 연산자로 바꿀수 있다.   turn = turn === 'X' ? 'o'  : 'x';
             //    })
                // $tr.append($td)
            }
            rows.push(cells);
            $table.appendChild($tr);
-           $table.addEventListener('click',callback);
+           $table.addEventListener('click',callback);  //이벤트 버블링 이용한 것!!
+           //$table.addEventListener('click',callback, true);  //기본 default는 false임... 부모 클릭시 자식에게 전달 되는 현상이 이벤트 캡쳐링인데 드물게 사용됨!!! 
+                           //모달창에서 바깥클릭시 창이 닫히게 할때 사용됨. 부모클릭시 자식인 창에 전달되서 닫히도록 할때 사용!!1
+                           //보통 자식에서 부모고 계속 전달되는 이벤트 버블링 현상이 많이 일어난다. 여기서도 td,tr,table 이렇게 부모에게 전달된다.
        }
        document.body.append($table);
        document.body.append($result);
+
+
+
+     //이벤트 버블링 예제!!! (p.334예제문제)
+         // document.querySelector('div').addEventListener('click', () => {
+        //     alert('hello, event bubbling')
+        // })
+
+         // document.querySelector('header').addEventListener('click', () => {
+        //     alert('hello, event bubbling')
+        // })
    </script>
 </body>
 </html>
