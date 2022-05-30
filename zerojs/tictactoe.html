@@ -60,25 +60,90 @@
     //    const $result = document.createElement('div')
   //아래처럼 줄여서 쓸수가 있다.
     const $table = document.createElement('table');
-    const $result = document.createElement('div')  //결과창!!
+    const $result = document.createElement('div');  //결과창!!
     const rows = [];
+    let turn = 'o'; // 첫사람은 o 표시
 
-       let turn = 'o'; // 첫사람은 o 표시
+// rows = [
+//         [td,td,td],
+//         [td,td,td],
+//         [td,td,td],
+//     ]
+
+    const checkWinner = (target) => {  //승리자 검사
+        let rowIndex;
+        let cellIndex;
+        rows.forEach((row,ri) => {  //이중반복문 돌아가는것을 잘 생각해본다.알고리즘에서도 이정도는 나온다.
+            row.forEach((cell, ci) => {
+                if(cell === target ) {
+                rowIndex = ri;
+                cellIndex = ci;
+             }
+          });
+            
+        });
+
+    //세칸 다 채워졌나?
+    let hasWinner = false;
+    //가로줄 검사
+        if(
+            rows[rowIndex][0].textContent === turn &&
+            rows[rowIndex][1].textContent === turn &&
+            rows[rowIndex][2].textContent === turn
+        ){
+            hasWinner = true;
+        }
+    //세로중 검사
+        if(
+            rows[cellIndex][0].textContent === turn &&
+            rows[cellIndex][1].textContent === turn &&
+            rows[cellIndex][2].textContent === turn 
+        ){
+            hasWinner = true;
+        }
+    //대각선 검사 => 대각선이 2가지가 존재함
+        if(
+            rows[0][0].textContent === turn &&
+            rows[1][1].textContent === true &&
+            rows[2][2].textContent === true
+        ){
+            hasWinner = true;   
+        }
+        if(
+            rows[0][2].textContent === turn &&
+            rows[1][1].textContent === true &&
+            rows[2][0].textContent === true
+        ){
+            hasWinner = true;   
+        }
+        return hasWinner;
+    }
+       
 
        // callback을 함수로 빼서 써주었다.
        const callback = (event) => {
         // event.stopPropagation();  //이벤트 버블링을 막기위해서 사용할 수 있다.
            if(event.target.textContent !==''){  // 칸이 이미 채워져 있는가?
                console.log('빈칸이 아닙니다.');
+               return;
            }
-           else{  //빈칸이면?
+           //빈칸이면?
                console.log('빈칸입니다.');
                event.target.textContent = turn;    //event.target하면 이벤트 버블링 현상에 의해 table에 addEventListener했어도 td에 작동이 된다.
                                                    //하지만 정확하게 table에만 일어나게 할꺼면 event.currentTarget을 써주면 td가 아닌 table에 일어난다.
+            //승부 판단하기.
+            const hasWinner = checkWinner(event.target);
+            //승자가 있으면
+            if(hasWinner){
+                $result.textContent = `${turn}님의 승리입니다.`
+                $table.removeEventListener('click', callback);  
+                return;
+            }
+            //승자가 없으면
                turn = (turn === 'x' ? 'o' : 'x');  //연산자에도 우선순위가 있어서 괄호 활용
            }
 
-       }
+       
 
 
     //    const data = [];  //데이터를 넣어준부분인데 위에 rows를 만들고 cell을 만들어 처리
@@ -95,12 +160,12 @@
         //         [td,td,td],
         //     ]
 
-       for(let i=0; i < 3; i++){
+       for(let i=0; i <3; i++){
          //  const $tr = document.createElement('tr');  //createElement의 경우는 구조분해 할당을 할수 없다!!!!
            const $tr =  document.createElement('tr');
            const cells = [];
 
-           for(let j=0; j < 3; j++){
+           for(let j=0; j <3; j++){
              //  const $td = document.createElement('td')
                const $td =  document.createElement('td');
             //원래 여기서 addEventListener를 해줬었다.
@@ -133,8 +198,8 @@
                            //모달창에서 바깥클릭시 창이 닫히게 할때 사용됨. 부모클릭시 자식인 창에 전달되서 닫히도록 할때 사용!!1
                            //보통 자식에서 부모고 계속 전달되는 이벤트 버블링 현상이 많이 일어난다. 여기서도 td,tr,table 이렇게 부모에게 전달된다.
        }
-       document.body.append($table);
-       document.body.append($result);
+       body.append($table);
+       body.append($result);
 
 
 
