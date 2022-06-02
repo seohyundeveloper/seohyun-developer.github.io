@@ -76,11 +76,10 @@
         rows.forEach((row,ri) => {  //이중반복문 돌아가는것을 잘 생각해본다.알고리즘에서도 이정도는 나온다.
             row.forEach((cell, ci) => {
                 if(cell === target ) {
-                rowIndex = ri;
-                cellIndex = ci;
-             }
-          });
-            
+                    rowIndex = ri;
+                    cellIndex = ci;
+                }
+            });
         });
 
     //세칸 다 채워졌나?
@@ -104,15 +103,15 @@
     //대각선 검사 => 대각선이 2가지가 존재함
         if(
             rows[0][0].textContent === turn &&
-            rows[1][1].textContent === true &&
-            rows[2][2].textContent === true
+            rows[1][1].textContent === turn &&
+            rows[2][2].textContent === turn
         ){
             hasWinner = true;   
         }
         if(
             rows[0][2].textContent === turn &&
-            rows[1][1].textContent === true &&
-            rows[2][0].textContent === true
+            rows[1][1].textContent === turn &&
+            rows[2][0].textContent === turn
         ){
             hasWinner = true;   
         }
