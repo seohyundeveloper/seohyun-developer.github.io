@@ -19,15 +19,14 @@ const sun = "sun";
 
 const daysOfWeek = mon + tue + wed + thr + fri + sat + sun;
 
-console.log(daysOfWeek)
-
+console.log(daysOfWeek);
 
 const calculator = {
     add : function (num, items) {
-        console.log(num + items);
+        alert(num + items);
     },
     minus : function (num, items) {
-        console.log(num - items);
+        alert(num - items);
     },
     divide : function ( num, items){
         console.log(num / items);
