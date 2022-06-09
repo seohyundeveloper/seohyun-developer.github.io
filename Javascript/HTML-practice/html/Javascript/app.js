@@ -2,10 +2,10 @@ let a = 16;
 const b = 2;
 let myName = "Nico";
 
-console.log(a + b);
-console.log(a * b);
-console.log(a / b);
-console.log( "hello " + myName );
+// console.log(a + b);
+// console.log(a * b);
+// console.log(a / b);
+// console.log( "hello " + myName );
 
 
 
@@ -19,23 +19,35 @@ const sun = "sun";
 
 const daysOfWeek = mon + tue + wed + thr + fri + sat + sun;
 
-console.log(daysOfWeek);
+// console.log(daysOfWeek);
 
 const calculator = {
     add : function (num, items) {
-        alert(num + items);
+        return num + items
     },
     minus : function (num, items) {
-        alert(num - items);
+        return num - items;
     },
     divide : function ( num, items){
-        console.log(num / items);
+        return num / items;
     },
-    multiply : function (num, items) {
-        console.log(num**items);
+    multiply : function (num,  items) {
+        return num**items;
     },
 }
- calculator.add(10, 5);
- calculator.minus(10, 5);
- calculator.divide(10, 5);
- calculator.multiply(10, 5);
+ const test = calculator.add(10, 5);
+ const t1 = calculator.minus(10, 5);
+ const t2 = calculator.divide(10, 5);
+ const t3 = calculator.multiply(10, 5);
+ 
+ // console.log(test, t1,t2,t3 )
+
+ const age = parseInt ( prompt( "How old are you ?") ) // prompt는 인자를 두개 받는다
+ //parseInt를 이용해서 string을 걸러낸다
+ console.log(isNaN(age));
+
+ if(isNaN(age)){  //숫자 아니야
+    console.log("please write a number");
+ } else{
+     console.log("Thank u for writing your age.")
+ }
