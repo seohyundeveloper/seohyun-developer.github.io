@@ -84,3 +84,32 @@ function handleMouseLeave(){
 title.addEventListener('click', handleTitleClick);
 title.addEventListener("mouseenter", handleMouseEnter);
 title.addEventListener("mouseleave", handleMouseLeave);
+
+
+
+const titles = document.querySelector("div.boiler:first-child");
+const colors = ["red", "purple", "lime", "maroon"];
+
+const superEventHandler = {
+  mouseenter: function () {
+    titles.innerText = "The mouse is here!";
+    titles.style.color = colors[0];
+  },
+  mouseleave: function () {
+    titles.innerText = "The mouse is gone!";
+    titles.style.color = colors[1];
+  },
+  resize: function () {
+    titles.innerText = "You are resized!";
+    titles.style.color = colors[2];
+  },
+  rightClick: function () {
+    titles.innerText = "That was a right click!";
+    titles.style.color = colors[3];
+  }
+};
+
+titles.addEventListener("mouseenter", superEventHandler.mouseenter);
+titles.addEventListener("mouseleave", superEventHandler.mouseleave);
+window.addEventListener("resize", superEventHandler.resize);
+window.addEventListener("contextmenu", superEventHandler.rightClick);
