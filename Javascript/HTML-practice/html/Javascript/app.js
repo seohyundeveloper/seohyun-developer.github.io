@@ -65,6 +65,22 @@ const calculator = {
 // title.innerText = "Got you!";
 // console.log(title)
 
-const hellos = document.getElementsByClassName("hello");
- 
-console.log(hellos)  // array가 나온다.
+// const hellos = document.getElementsByClassName("hello");
+// const title = document.getElementsByTagName("h1");
+// console.log(hellos)  // array가 나온다.
+
+const title = document.querySelector("div.hello:first-child");
+
+function handleTitleClick(){
+    title.style.color = "maroon";
+}
+function handleMouseEnter(){
+    title.innerText = "Mouse is here!"
+}
+function handleMouseLeave(){
+    title.innerText = "Mouse is gone!"
+}
+
+title.addEventListener('click', handleTitleClick);
+title.addEventListener("mouseenter", handleMouseEnter);
+title.addEventListener("mouseleave", handleMouseLeave);
