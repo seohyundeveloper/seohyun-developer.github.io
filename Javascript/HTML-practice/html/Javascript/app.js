@@ -65,51 +65,69 @@ const calculator = {
 // title.innerText = "Got you!";
 // console.log(title)
 
-// const hellos = document.getElementsByClassName("hello");
-// const title = document.getElementsByTagName("h1");
-// console.log(hellos)  // array가 나온다.
+const hellos = document.getElementsByClassName("hello");
+const title2 = document.getElementsByTagName("h1");
+console.log(hellos)  // array가 나온다.
 
-const title = document.querySelector("div.hello:first-child");
+const titles = document.querySelector("div.hello:first-child");
 
 function handleTitleClick(){
-    title.style.color = "maroon";
+    titles.style.color = "maroon";
 }
 function handleMouseEnter(){
-    title.innerText = "Mouse is here!"
+    titles.innerText = "Mouse is here!"
 }
 function handleMouseLeave(){
-    title.innerText = "Mouse is gone!"
+    titles.innerText = "Mouse is gone!"
+}
+function handleWindowResize() {
+    document.body.style.backgroundColor = "tomato";
+}
+function handleWindowCopy(){
+  alert("copier");
+}
+function handleWindowOffline(){
+  alert("sos no WIFI");
+}
+function handleWindowOnline(){
+  alert("ALL GOOD");
 }
 
-title.addEventListener('click', handleTitleClick);
-title.addEventListener("mouseenter", handleMouseEnter);
-title.addEventListener("mouseleave", handleMouseLeave);
+titles.addEventListener('click', handleTitleClick);
+titles.addEventListener("mouseenter", handleMouseEnter);
+titles.addEventListener("mouseleave", handleMouseLeave);
+
+window.addEventListener("resize", handleWindowResize);
+window.addEventListener("copy", handleWindowCopy);
+
+window.addEventListener("offline", handleWindowOffline);
+window.addEventListener("online", handleWindowOnline);
 
 
+//과제
+// const adds = document.querySelector("div.boiler:first-child");
+// const colors = ["red", "purple", "lime", "maroon"];
 
-const titles = document.querySelector("div.boiler:first-child");
-const colors = ["red", "purple", "lime", "maroon"];
+// const superEventHandler = {
+//   mouseenter: function () {
+//     adds.innerText = "The mouse is here!";
+//     adds.style.color = colors[0];
+//   },
+//   mouseleave: function () {
+//     adds.innerText = "The mouse is gone!";
+//     adds.style.color = colors[1];
+//   },
+//   resize: function () {
+//     adds.innerText = "You are resized!";
+//     adds.style.color = colors[2];
+//   },
+//   rightClick: function () {
+//     adds.innerText = "That was a right click!";
+//     adds.style.color = colors[3];
+//   }
+// };
 
-const superEventHandler = {
-  mouseenter: function () {
-    titles.innerText = "The mouse is here!";
-    titles.style.color = colors[0];
-  },
-  mouseleave: function () {
-    titles.innerText = "The mouse is gone!";
-    titles.style.color = colors[1];
-  },
-  resize: function () {
-    titles.innerText = "You are resized!";
-    titles.style.color = colors[2];
-  },
-  rightClick: function () {
-    titles.innerText = "That was a right click!";
-    titles.style.color = colors[3];
-  }
-};
-
-titles.addEventListener("mouseenter", superEventHandler.mouseenter);
-titles.addEventListener("mouseleave", superEventHandler.mouseleave);
-window.addEventListener("resize", superEventHandler.resize);
-window.addEventListener("contextmenu", superEventHandler.rightClick);
+// adds.addEventListener("mouseenter", superEventHandler.mouseenter);
+// adds.addEventListener("mouseleave", superEventHandler.mouseleave);
+// window.addEventListener("resize", superEventHandler.resize);
+// window.addEventListener("contextmenu", superEventHandler.rightClick);
