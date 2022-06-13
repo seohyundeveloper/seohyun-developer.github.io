@@ -2,14 +2,17 @@
 // const loginInput =  loginForm.querySelector("input");
 // const loginButton = loginForm.querySelector("button");
 
+// const loginInput = document.querySelector("#login-form input");
+// const loginButton = document.querySelector("#login-form button");
+const loginForm = document.querySelector("#login-form"); 
 const loginInput = document.querySelector("#login-form input");
-const loginButton = document.querySelector("#login-form button");
+
 
 function onLoginBtnClick(){
    // console.dir(loginInput);
   // console.log(loginInput.value);    //input에 입력되는 value 값을 가져올수 있다.
    const username = loginInput.value; 
-
+  console.log(username);
    //유효성 검사
    // if(username === '') { 
    //    alert("Please write your name!!");
@@ -18,4 +21,11 @@ function onLoginBtnClick(){
    // }
 }
 
-loginButton.addEventListener("click", onLoginBtnClick)
+function onLoginSubmit(){ 
+   const username = loginInput.value; 
+   console.log(username);
+}
+
+//loginButton.addEventListener("click", onLoginBtnClick)
+
+loginForm.addEventListener("submit", onLoginSubmit);
