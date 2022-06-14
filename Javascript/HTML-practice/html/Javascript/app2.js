@@ -27,7 +27,7 @@ function onLoginSubmit(event){
    loginForm.classList.add(HIDDEN_CLASSNAME);  //hidden 이라는 클래스를 줘서 submit이 되고나면 화면이 사라지게 하기위해 클래스를 줘서 실행해준다.
   
    const username = loginInput.value; 
-   
+   localStorage.setItem("username", username); // 로컬 스토리지에 저장하기
   // greeting.innerText = "Hello! "+ username;  // string을 합치는것!! 아래의 방법을 선호한다.
    greeting.innerText = `Hello! ${username}`; 
    greeting.classList.remove(HIDDEN_CLASSNAME);
@@ -36,6 +36,15 @@ function onLoginSubmit(event){
 //loginButton.addEventListener("click", onLoginBtnClick)
 
 loginForm.addEventListener("submit", onLoginSubmit);
+
+const saveUsername = localStorage.getItem("username");  //로컬스토리지에 저장된 값 가져오기!!!
+//console.log(saveUsername)
+
+if (saveUsername === null) {
+   //show the form
+} else{
+   //show the greetings
+}
 
 
 
