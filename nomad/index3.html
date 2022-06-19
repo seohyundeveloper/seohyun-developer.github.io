@@ -10,28 +10,30 @@
 <body>
 <section class="container">
   <h2 id="clock"> 00 : 00 </h2>
-  <form id="login-form" class="hidden">  <!--div태그가 아닌 form태그 안에서 일어나야 input의 유효성 검사가 일어날수 있다.-->
+  <form id="login-form" class="hidden login-box">  <!--div태그가 아닌 form태그 안에서 일어나야 input의 유효성 검사가 일어날수 있다.-->
       <!--하지만 form이 진행될때마다 계속 새로고침이 일어나는 단점이 있다. 이를 개선해야 한다.-->
       <input required 
               maxlength = "15"
               type="text"
+              class="input-box"
               placeholder="What is your name?" />
-              <input type="submit" value="Login In" />
+      <input type="submit" value="Login In" class="login-submit"/>
           <!-- <button>Log In</button>       -->
   </form>
   
-  <h1 id="greeting" class="hidden"></h1>
+  <h1 id="greeting" class="hidden greeting-box"></h1>
     <!--a태그의 기본동작인 클릭하면 이동하는 이벤트를 막아보는 연습을 진행함!!!-->
     <!-- <a href="https://nomadcoders.co">Go to course!</a> -->
-  <form id="todo-form">
-    <input type="text" placeholder="Write a To do and Press Enter." required />
+  <form id="todo-form" class="todo-form">
+    <input type="text" placeholder="Write a To do and Press Enter." required class="input-list"/>
   </form> 
-  <ul id="todo-list"></ul>
-  <div id="quote">
+  <ul id="todo-list" class="todo-box"></ul>
+  <div id="quote" class="quotes">
+    <span></span>
     <span></span>
     <span></span>
   </div>
-  <div id="weather">
+  <div id="weather" class="weather-box">
     <span></span>
     <span></span>
   </div>
